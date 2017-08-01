@@ -1,0 +1,32 @@
+Option 1: Use existing Jenkins Feature
+Click Customize your jenkins job
+Build Triggers > Build after other Projects are built.
+you can mention which projects needs to be watched and you have multiple options such as
+
+Trigger only if the build is stable
+Trigger even if the build is not stable
+Trigger even if the build fails
+This avoids multiple dependent projects not to be triggered if you select option 1
+
+
+Option 2: Parameterized Trigger Plugin 
+Create a wrapper job for your sequential jobs
+For each sequential job
+Select Build->Add build step->Trigger/call builds on other projects
+Enter the sequential job name
+Check the ‘Block until the triggered projects finish their builds’ checkbox (this only appears when you have the Parameterized Trigger Plugin installed)
+Now when you run the wrapper job, all the triggered jobs will be run in order and sequentially. You of course also have the option of using the parameters functionality of the plugin too
+
+
+
+Option 3: Build Pipeline Plugin
+Gives the ability to form a chain of jobs based on their upstream\downstream dependencies. Downstream jobs may, as per the default behaviours, be triggered automatically ,or by a suitable authorised user manually triggering it.
+
+
+
+Option 4: Downstream –Ext Plugin
+This plugin supports extended configuration for triggering downstream builds:
+
+trigger build only if downstream job has SCM changes
+trigger build if upstream build result is better/equal/worse than any given result (SUCCESS, UNSTABLE, FAILURE, ABORTED)
+for Matrix (alias multi-configuration) jobs you can decide which part of the job should trigger the downstream job: parent only, configurations only or both
