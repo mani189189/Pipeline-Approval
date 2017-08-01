@@ -24,7 +24,7 @@ echo 'Building..'
               }
             }
             steps {
-                sh 'echo 'make publish''
+                 echo 'make publish'
             }
         }
        }                     
